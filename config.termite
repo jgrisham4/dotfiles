@@ -1,3 +1,4 @@
+# This file should be named config
 [options]
 font = Ubuntu Mono derivative Powerline 11.0
 #font = Inconsolata 12.0
