@@ -1,0 +1,197 @@
+" Turning off compatability with vi
+set nocompatible
+
+" Search as you type
+set incsearch
+
+" Setting memory/number of lines that can be copied
+set viminfo='100,<1000,s100,h
+
+" Make backspace behave in a sane manner.
+set backspace=indent,eol,start
+
+" Turning on wildmenu to help with opening files
+set wildmenu
+
+" Switch syntax highlighting on
+syntax on
+
+" Enable file type detection and do language-dependent indenting.
+filetype plugin indent on
+
+" Mapping tabnext and tabprev to F8 and F7
+map <F7> :tabp <CR>
+map <F8> :tabn <CR>
+
+" Increasing the number of lines that can be yanked
+set viminfo+=<500
+
+" Mapping paste mode to F2
+set pastetoggle=<F2>
+
+" Setting tabs
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set softtabstop=0
+
+" Some settings to speed up vim and avoid scrolling problems
+set ttyfast
+set lazyredraw
+
+" Setting tabs for MATLAB files
+autocmd Filetype matlab setlocal expandtab tabstop=4 shiftwidth=4
+" Same thing, but shorter
+"au Filetype matlab setl et ts=4 sw=4
+
+" Shortening message size
+"set shortmess=a
+set shortmess=aoOtI
+set cmdheight=1
+
+"Remove all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" Turning on relative numbering
+set number
+set relativenumber
+
+" Turning on file-type based indentation
+filetype plugin indent on
+
+" Showing the cursorline
+set cursorline
+
+" This is so that the file is opened back to the same line as before
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
+
+" Disabling auto-commenting (i.e., continuing comments when inserting new lines)
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Enabling pylint
+autocmd FileType python compiler pylint
+
+" Some file associations
+au BufNewFile,BufRead *.glf setlocal ft=tcl
+au BufNewFile,BufRead *.fun setlocal ft=fortran
+
+" Highlighting searches
+set hlsearch
+
+" Remapping noh to \
+nnoremap \ :noh<return>
+
+" Setup for airline
+set laststatus=2
+let g:airline_powerline_fonts=1
+let g:Powerline_symbols='unicode'
+
+" Don't show separators in airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+
+" Setting scroll so that cursor leaves 4 lines
+set scrolloff=4
+
+" Allowing fortran free source
+let fortran_free_source=0
+
+" Allowing for more precise syntax highlight of Fortran code
+let fortran_more_precise=1
+
+" Setting the colorspace
+set t_Co=256
+
+" Calling pathogen
+call pathogen#infect()
+
+" Syntastic
+map <Leader>s :SyntasticToggleMode<CR>
+let g:syntastic_python_checkers = ['pylint']
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "passive_filetypes": ["tex","cpp"] }
+""passive_filetypes": ["tex","python"] }
+
+" Adding some arguments to pylint
+let g:syntastic_python_pylint_args = '--const-rgx="[a-z_][a-z0-9_]{2,30}$"'
+
+" Setting syntax checker for MATLAB files
+let g:syntastic_matlab_checkers = ['mlint']
+
+" Setting syntax checker for C++ files
+"let g:syntastic_cpp_checkers = ['clang_check', 'gcc']
+
+" ghc-mod
+map <silent> tw :GhcModTypeInsert<CR>
+map <silent> ts :GhcModSplitFunCase<CR>
+map <silent> tq :GhcModType<CR>
+map <silent> te :GhcModTypeClear<CR>
+
+" Supertab
+let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
+
+if has("gui_running")
+  imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+else " no gui
+  if has("unix")
+    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
+  endif
+endif
+let g:haskellmode_completion_ghc = 1
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+" nerdtree
+let mapleader = "\\"
+map <Leader>n :NERDTreeToggle<CR>
+
+" Tabularize
+let g:haskell_tabular = 1
+
+" ctrl-p fuzzy file finder
+map <silent> <Leader>t :CtrlP()<CR>
+noremap <leader>b<space> :CtrlPBuffer<cr>
+let g:ctrlp_custom_ignore = '\v[\/]dist$'
+
+" Some syntastic settings
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
+" Setting colorscheme
+set background=dark
+"set background=light
+colorscheme solarized
+let g:airline_theme='solarized'
+"let g:solarized_termcolors=256
+"colorscheme pencil
+"colorscheme ironman
+"colorscheme base16-default-dark
+"colorscheme jellybeans
+"colorscheme lucius
+"LuciusDark
+"LuciusLight
+"let g:airline_theme='pencil'
+"let g:airline_theme='jellybeans'
+
+" Displaying some unprintable characters
+set list          " Display unprintable characters f12 - switches
+set listchars=tab:·\ ,trail:·,extends:»,precedes:« " Unprintable chars mapping
+"set listchars=tab:>-,trail:~,extends:>,precedes:<
+
