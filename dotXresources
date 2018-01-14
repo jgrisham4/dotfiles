@@ -1,0 +1,102 @@
+! Google light
+!! special
+!*.foreground:   #373b41
+!*.background:   #ffffff
+!*.cursorColor:  #373b41
+!
+!! black
+!*.color0:       #1d1f21
+!*.color8:       #969896
+!
+!! red
+!*.color1:       #cc342b
+!*.color9:       #cc342b
+!
+!! green
+!*.color2:       #198844
+!*.color10:      #198844
+!
+!! yellow
+!*.color3:       #fba922
+!*.color11:      #fba922
+!
+!! blue
+!*.color4:       #3971ed
+!*.color12:      #3971ed
+!
+!! magenta
+!*.color5:       #a36ac7
+!*.color13:      #a36ac7
+!
+!! cyan
+!*.color6:       #3971ed
+!*.color14:      #3971ed
+!
+!! white
+!*.color7:       #c5c8c6
+!*.color15:      #ffffff
+
+
+! My color scheme
+! special
+URxvt.foreground:   #FFFFFF
+URxvt.background:   #1d1f21
+URxvt.cursorColor:  #c5c8c6
+
+! black
+URxvt.color0:       #2E3436
+URxvt.color8:       #555753
+
+! red
+URxvt.color1:       #CC0000
+URxvt.color9:       #EF2929
+
+! green
+URxvt.color2:       #4E9A06
+URxvt.color10:      #8AE234
+
+! yellow
+URxvt.color3:       #C4A000
+URxvt.color11:      #FCE94F
+
+! blue
+URxvt.color4:       #6495ed
+URxvt.color12:      #729FCF
+
+! magenta
+URxvt.color5:       #75507B
+URxvt.color13:      #AD7FA8
+
+! cyan
+URxvt.color6:       #06989A
+URxvt.color14:      #34E2E2
+
+! white
+URxvt.color7:       #D3D7CF
+URxvt.color15:      #EEEEEC
+
+
+! Making transparent
+URxvt.transparent: true
+URxvt.shading: 30
+
+! Improving how fonts look
+Xft.dpi: 96
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.autohint: false
+!Xft.hinting: false
+!Xft.hintstyle: hintfull
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+URxvt.scrollBar: false
+URxvt.intensityStyles: false
+URxvt*letterSpace: -1
+!URxvt.font: xft:Droid Sans Mono Slashed for Powerline:pixelsize=14
+!URxvt.boldFont: xft:Droid Sans Mono Slashed for Powerline:pixelsize=14
+!Urxvt.font: xft:Source Code Pro:pixelsize=17
+!Urxvt.boldFont: xft:Source Code Pro:pixelsize=17
+!URxvt.boldFont: xft:Ubuntu Mono derivative Powerline:pixelsize=17
+!URxvt.font: xft:Ubuntu Mono derivative Powerline:pixelsize=17
+

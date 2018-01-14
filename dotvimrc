@@ -72,7 +72,7 @@ endif
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Enabling pylint
-autocmd FileType python compiler pylint
+"autocmd FileType python compiler pylint
 
 " Some file associations
 au BufNewFile,BufRead *.glf setlocal ft=tcl
@@ -104,6 +104,8 @@ let fortran_more_precise=1
 
 " Setting the colorspace
 set t_Co=256
+"set t_Co=16
+"let base16colorspace=16
 
 " Calling pathogen
 call pathogen#infect()
@@ -175,17 +177,21 @@ let g:ctrlp_custom_ignore = '\v[\/]dist$'
 "let g:syntastic_check_on_wq = 0
 
 " Setting colorscheme
-set background=dark
-"set background=light
-colorscheme solarized
-let g:airline_theme='solarized'
 "let g:solarized_termcolors=256
+"set background=dark
+"set background=light
+"colorscheme solarized
+"let g:airline_theme='solarized'
 "colorscheme pencil
 "colorscheme ironman
 "colorscheme base16-default-dark
-"colorscheme jellybeans
+colorscheme jellybeans
+"colorscheme codeschoolmod
 "colorscheme lucius
 "LuciusDark
+"colorscheme base16-tomorrow-night256
+"colorscheme TomorrowNight
+"colorscheme atom-dark-256
 "LuciusLight
 "let g:airline_theme='pencil'
 "let g:airline_theme='jellybeans'
