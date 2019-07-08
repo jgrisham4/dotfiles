@@ -16,7 +16,7 @@ toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 
 myConfig = defaultConfig
     { manageHook = manageDocks <+> manageHook defaultConfig
-    , layoutHook = avoidStruts $ myLayout
+    , layoutHook = avoidStruts myLayout
     , modMask = mod4Mask
     , workspaces = myWorkspaces
     , terminal = "termite"
