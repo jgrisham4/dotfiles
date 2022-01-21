@@ -1,11 +1,26 @@
 " Turning off compatability with vi
 set nocompatible
 
+" Allowing for more precise syntax highlight of Fortran code
+let fortran_more_precise=1
+
+" Allow free from Fortran.
+let fortran_free_source=1
+
+" Enforce fixed source.
+"let fortran_fixed_source=1
+
+" Ignore whitespace when diffing files.
+"set diffopt+=iwhite -- This doesn't seem to work on Mac.
+
 " Search as you type
 set incsearch
 
 " Setting memory/number of lines that can be copied
 set viminfo='100,<1000,s100,h
+
+" Increasing the number of lines that can be yanked
+set viminfo+=<500
 
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
@@ -16,15 +31,57 @@ set wildmenu
 " Switch syntax highlighting on
 syntax on
 
+" Call vim-plug
+call plug#begin(expand('~/.vim/plugged'))
+
+" Specify plugins.
+Plug 'vim-airline/vim-airline'
+"Plug 'vim-syntastic/syntastic'
+Plug 'preservim/nerdtree'
+Plug 'godlygeek/tabular'
+Plug 'arcticicestudio/nord-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'reedes/vim-colors-pencil'
+Plug 'dense-analysis/ale'
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
+Plug 'https://github.com/tpope/vim-fugitive'
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
+call plug#end()
+
+" Set pydocstring format to google.
+let g:pydocstring_formatter = 'google'
+
+" Turn on powerline symbols.
+let g:airline_powerline_fonts = 0
+
+" Turn off file filetype and encoding sections.
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+
+" Customize position in file display.
+let g:airline_section_z = '%3p%% C:%3c'
+
+" Turn on extensions for signify.
+let g:airline#extensions#hunks#enabled=1
+
+" Make signify work in real time.
+let g:signify_realtime=1
+
+" Specify working path mode.
+let g:ctrlp_working_path_mode='..ra'
+
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
 
 " Mapping tabnext and tabprev to F8 and F7
 map <F7> :tabp <CR>
 map <F8> :tabn <CR>
-
-" Increasing the number of lines that can be yanked
-set viminfo+=<500
 
 " Mapping paste mode to F2
 set pastetoggle=<F2>
@@ -37,17 +94,10 @@ set softtabstop=0
 
 " Some settings to speed up vim and avoid scrolling problems
 set ttyfast
-set lazyredraw
 
 " Setting tabs for MATLAB files
 autocmd Filetype matlab setlocal expandtab tabstop=4 shiftwidth=4
-" Same thing, but shorter
-"au Filetype matlab setl et ts=4 sw=4
-
-" Shortening message size
-"set shortmess=a
-set shortmess=aoOtI
-set cmdheight=1
+autocmd Filetype yaml setlocal expandtab tabstop=2 shiftwidth=2
 
 "Remove all trailing whitespace by pressing F5
 nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
@@ -55,9 +105,6 @@ nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 " Turning on relative numbering
 set number
 set relativenumber
-
-" Turning on file-type based indentation
-filetype plugin indent on
 
 " Showing the cursorline
 set cursorline
@@ -71,11 +118,12 @@ endif
 " Disabling auto-commenting (i.e., continuing comments when inserting new lines)
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" Enabling pylint
-"autocmd FileType python compiler pylint
-
 " Some file associations
 au BufNewFile,BufRead *.glf setlocal ft=tcl
+au BufNewFile,BufRead *.cls setlocal ft=tex
+au BufNewFile,BufRead *.m setlocal ft=matlab
+au BufNewFile,BufRead *.md setlocal ft=markdown
+au BufNewFile,BufRead *.asy setlocal ft=c
 au BufNewFile,BufRead *.fun setlocal ft=fortran
 
 " Highlighting searches
@@ -84,120 +132,67 @@ set hlsearch
 " Remapping noh to \
 nnoremap \ :noh<return>
 
-" Setup for airline
-set laststatus=2
-let g:airline_powerline_fonts=1
-let g:Powerline_symbols='unicode'
-
-" Don't show separators in airline
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-
 " Setting scroll so that cursor leaves 4 lines
 set scrolloff=4
 
-" Allowing fortran free source
-let fortran_free_source=0
-
-" Allowing for more precise syntax highlight of Fortran code
-let fortran_more_precise=1
-
-" Setting the colorspace
-set t_Co=256
-"set t_Co=16
-"let base16colorspace=16
-
-" Calling pathogen
-call pathogen#infect()
-
-" Syntastic
-map <Leader>s :SyntasticToggleMode<CR>
-let g:syntastic_python_checkers = ['pylint']
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+" Setup syntastic.
 let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "passive_filetypes": ["tex","cpp"] }
-""passive_filetypes": ["tex","python"] }
+    \ "mode": "passive",
+    \ "active_filetypes": ["python","matlab"],
+    \ "passive_filetypes": ["tex","c"] }
 
-" Adding some arguments to pylint
-let g:syntastic_python_pylint_args = '--const-rgx="[a-z_][a-z0-9_]{2,30}$"'
-
-" Setting syntax checker for MATLAB files
-let g:syntastic_matlab_checkers = ['mlint']
-
-" Setting syntax checker for C++ files
-"let g:syntastic_cpp_checkers = ['clang_check', 'gcc']
-
-" ghc-mod
-map <silent> tw :GhcModTypeInsert<CR>
-map <silent> ts :GhcModSplitFunCase<CR>
-map <silent> tq :GhcModType<CR>
-map <silent> te :GhcModTypeClear<CR>
-
-" Supertab
-let g:SuperTabDefaultCompletionType = '<c-x><c-o>'
-
-if has("gui_running")
-  imap <c-space> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-else " no gui
-  if has("unix")
-    inoremap <Nul> <c-r>=SuperTabAlternateCompletion("\<lt>c-x>\<lt>c-o>")<cr>
-  endif
-endif
-let g:haskellmode_completion_ghc = 1
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-" nerdtree
-let mapleader = "\\"
-map <Leader>n :NERDTreeToggle<CR>
-
-" Tabularize
-let g:haskell_tabular = 1
-
-" ctrl-p fuzzy file finder
-map <silent> <Leader>t :CtrlP()<CR>
-noremap <leader>b<space> :CtrlPBuffer<cr>
-let g:ctrlp_custom_ignore = '\v[\/]dist$'
-
-" Some syntastic settings
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
 
-" Setting colorscheme
-"let g:solarized_termcolors=256
-"set background=dark
+" Set to 256 color.
+set t_Co=256
+
+" Set dark theme.
+set background=dark
+colorscheme nord
+"colorscheme gruvbox
+
+" Define light theme.
 "set background=light
-"colorscheme solarized
-"let g:airline_theme='solarized'
-"colorscheme pencil
-"colorscheme ironman
-"colorscheme base16-default-dark
-colorscheme jellybeans
-"colorscheme codeschoolmod
 "colorscheme lucius
-"LuciusDark
-"colorscheme base16-tomorrow-night256
-"colorscheme TomorrowNight
-"colorscheme atom-dark-256
 "LuciusLight
-"let g:airline_theme='pencil'
-"let g:airline_theme='jellybeans'
+"let g:airline_theme = 'pencil'
 
 " Displaying some unprintable characters
 set list          " Display unprintable characters f12 - switches
 set listchars=tab:·\ ,trail:·,extends:»,precedes:« " Unprintable chars mapping
-"set listchars=tab:>-,trail:~,extends:>,precedes:<
 
+" Define key mappings.
+nnoremap <Leader>w :set wrap!<return>
+nnoremap <Leader>sp :set spell<return>
+
+" air-line
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''

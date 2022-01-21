@@ -4,22 +4,28 @@
 xrdb -load ~/.Xresources
 
 # Mapping caps lock to escape
-xmodmap -e 'clear Lock' #ensures you're not stuck in CAPS on mode
-xmodmap -e 'keycode 0x42=Escape' #remaps the keyboard so CAPS LOCK=ESC
+#xmodmap -e 'clear Lock' #ensures you're not stuck in CAPS on mode
+#xmodmap -e 'keycode 0x42=Escape' #remaps the keyboard so CAPS LOCK=ESC
 for f in /etc/X11/xinit/xinitrc.d/?*.sh; do
-    [ -x "$f" ] && . "$f"
+  [ -x "$f" ] && . "$f"
 done
 unset f
 
+if [ -f ~/.xmodmap ]; then
+  xmodmap ~/.xmodmap
+fi
+
 # Starting xcompmgr
-xcompmgr &
+#xcompmgr &
 
 #xrandr --output DisplayPort-1 --mode 1920x1200 --rotate right
-xrandr --output DisplayPort-1 --mode 1920x1200
+#xrandr --output DisplayPort-1 --mode 1920x1200
+xrandr --output DP-2 --mode 3840x2160 --primary --output HDMI-2 --auto --left-of DP-2
 
 feh --bg-scale /home/james/Pictures/mountains.jpg
+#feh  /home/james/Pictures/forest_pine_trees_grass_3840x2160.jpg
 
-exec xmonad
-#exec i3
+#exec xmonad
+exec i3
 #exec startlxde
 

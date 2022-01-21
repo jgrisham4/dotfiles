@@ -17,7 +17,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Ubuntu 10
+#font pango:Ubuntu 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -32,8 +32,9 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 #bindsym $mod+Return exec termite
-bindsym $mod+Return exec urxvt -e tmux
-#bindsym $mod+Return exec urxvt
+#bindsym $mod+Return exec urxvt -e tmux
+bindsym $mod+Return exec urxvt
+#bindsym $mod+Return exec xterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -163,22 +164,23 @@ bindsym $mod+r mode "resize"
 
 # Old config
 bar {
-	colors {
-		# Whole color settings
-		background #505050
-		statusline #ffffff
-		separator  #d0d0d0
+  font pango:FiraSans-Regular 9
+  colors {
+    # Whole color settings
+    background #505050
+    statusline #ffffff
+    separator  #d0d0d0
 
-		# Type             border  background font
-		focused_workspace  #d0d0d0 #007fff #ffffff
-		active_workspace   #333333 #5f676a #ffffff
-		inactive_workspace #333333 #222222 #888888
-		urgent_workspace   #aa0000 #990000 #ffffff
-	}
-	# i3bar position
-	position top
-	# Using custom i3status.conf
-	status_command i3status -c ~/.i3status.conf
+    # Type             border  background font
+    focused_workspace  #d0d0d0 #007fff #ffffff
+    active_workspace   #333333 #5f676a #ffffff
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace   #aa0000 #990000 #ffffff
+  }
+  # i3bar position
+  position top
+  # Using custom i3status.conf
+  status_command i3status -c ~/.i3status.conf
 }
 #bar {
 #    i3bar_command /home/james/.config/lemonbar/bar.sh
@@ -192,19 +194,26 @@ exec --no-startup-id nitrogen --restore
 
 #new_window 1pixel
 
+# Make figures float.
+for_window [title="Figure*" class="^ $"] floating
+
 # The below is for i3-gaps
-for_window [class="^.*"] border pixel 2
-gaps inner 0
-gaps outer 0
+#for_window [class="^.*"] border pixel 2
+#gaps inner 0
+#gaps outer 0
 #gaps inner 2
 #gaps outer 2
 #smart_gaps on  # turns gaps off if there is only one window
 
+# Remove window title bar.
+default_border pixel 2
+default_floating_border pixel 2
+
 # class                 border  backgr. text    indicator child_border
 #client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #0047ba
+#client.focused          #4c7899 #285577 #ffffff #2e9ef4   #0047ba
 #client.focused          #00cc00 #285577 #ffffff #2e9ef4   #ff0000  # red
-client.unfocused        #333333 #222222 #888888 #292d2e   #909090 
+#client.unfocused        #333333 #222222 #888888 #292d2e   #909090 
 
 # This is to allow for resizing windows using ctrl+win+arrow keys
 bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt

@@ -1,87 +1,36 @@
-! Google light
-!! special
-!*.foreground:   #373b41
-!*.background:   #ffffff
-!*.cursorColor:  #373b41
-!
-!! black
-!*.color0:       #1d1f21
-!*.color8:       #969896
-!
-!! red
-!*.color1:       #cc342b
-!*.color9:       #cc342b
-!
-!! green
-!*.color2:       #198844
-!*.color10:      #198844
-!
-!! yellow
-!*.color3:       #fba922
-!*.color11:      #fba922
-!
-!! blue
-!*.color4:       #3971ed
-!*.color12:      #3971ed
-!
-!! magenta
-!*.color5:       #a36ac7
-!*.color13:      #a36ac7
-!
-!! cyan
-!*.color6:       #3971ed
-!*.color14:      #3971ed
-!
-!! white
-!*.color7:       #c5c8c6
-!*.color15:      #ffffff
+! Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
+! Copyright (c) 2016-present Sven Greb <code@svengreb.de>
 
+! Project:    Nord XResources
+! Version:    0.1.0
+! Repository: https://github.com/arcticicestudio/nord-xresources
+! License:    MIT
 
-! My color scheme
-! special
-!URxvt.foreground:   #FFFFFF
-!URxvt.background:   #1d1f21
-!URxvt.cursorColor:  #c5c8c6
-!
-!! black
-!URxvt.color0:       #2E3436
-!URxvt.color8:       #555753
-!
-!! red
-!URxvt.color1:       #CC0000
-!URxvt.color9:       #EF2929
-!
-!! green
-!URxvt.color2:       #4E9A06
-!URxvt.color10:      #8AE234
-!
-!! yellow
-!URxvt.color3:       #C4A000
-!URxvt.color11:      #FCE94F
-!
-!! blue
-!URxvt.color4:       #6495ed
-!URxvt.color12:      #729FCF
-!
-!! magenta
-!URxvt.color5:       #75507B
-!URxvt.color13:      #AD7FA8
-!
-!! cyan
-!URxvt.color6:       #06989A
-!URxvt.color14:      #34E2E2
-!
-!! white
-!URxvt.color7:       #D3D7CF
-!URxvt.color15:      #EEEEEC
-!
-!
-!! Making transparent
-!URxvt.transparent: true
-!URxvt.shading: 30
+*.foreground:   #D8DEE9
+*.background:   #2E3440
+*.cursorColor:  #D8DEE9
+!*fading: 35
+!*fadeColor: #4C566A
 
-! Improving how fonts look
-Xft.dpi: 96
+*.color0: #3B4252
+*.color1: #BF616A
+*.color2: #A3BE8C
+*.color3: #EBCB8B
+*.color4: #81A1C1
+*.color5: #B48EAD
+*.color6: #88C0D0
+*.color7: #E5E9F0
+*.color8: #4C566A
+*.color9: #BF616A
+*.color10: #A3BE8C
+*.color11: #EBCB8B
+*.color12: #81A1C1
+*.color13: #B48EAD
+*.color14: #8FBCBB
+*.color15: #ECEFF4
+
+! Improve how fonts look.
+Xft.dpi: 144
 Xft.antialias: true
 Xft.rgba: rgb
 Xft.autohint: 0
@@ -92,7 +41,7 @@ Xft.lcdfilter: lcddefault
 
 URxvt.scrollBar: false
 URxvt.intensityStyles: false
-!URxvt*letterSpace: -1
+URxvt*letterSpace: -1
 !URxvt.font: xft:Droid Sans Mono Slashed for Powerline:pixelsize=14
 !URxvt.boldFont: xft:Droid Sans Mono Slashed for Powerline:pixelsize=14
 !Urxvt.font: xft:Source Code Pro:pixelsize=17
@@ -101,6 +50,9 @@ URxvt.intensityStyles: false
 !URxvt.font: xft:Ubuntu Mono derivative Powerline:pixelsize=17
 !URxvt.boldFont: xft:Consolas-Bold:pixelsize=15
 !URxvt.font: xft:Consolas-Regular:pixelsize=15
-URxvt.boldFont: xft:Inconsolata-Bold:pixelsize=17
-URxvt.font: xft:Inconsolata:pixelsize=17
-
+!URxvt.boldFont: xft:Inconsolata-Bold:pixelsize=17
+!URxvt.font: xft:Inconsolata:pixelsize=17
+!URxvt.boldFont: xft:FiraMono-Bold:pixelsize=20
+!URxvt.font: xft:FiraMono-Regular:pixelsize=20
+URxvt.boldFont: xft:FiraCode-Bold:pixelsize=18
+URxvt.font: xft:FiraCode-Regular:pixelsize=18
