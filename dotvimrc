@@ -31,6 +31,9 @@ set wildmenu
 " Switch syntax highlighting on
 syntax on
 
+" Default to not read-only in vimdiff.
+set noro
+
 " Call vim-plug
 call plug#begin(expand('~/.vim/plugged'))
 
@@ -41,9 +44,9 @@ Plug 'preservim/nerdtree'
 Plug 'godlygeek/tabular'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jonathanfilip/vim-lucius'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'reedes/vim-colors-pencil'
+"Plug 'jonathanfilip/vim-lucius'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'reedes/vim-colors-pencil'
 Plug 'dense-analysis/ale'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 Plug 'https://github.com/tpope/vim-fugitive'
@@ -56,6 +59,11 @@ call plug#end()
 
 " Set pydocstring format to google.
 let g:pydocstring_formatter = 'google'
+
+" Customize ALE.
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+let g:ale_virtualtext_cursor=0
 
 " Turn on powerline symbols.
 let g:airline_powerline_fonts = 0
@@ -175,24 +183,24 @@ if !exists('g:airline_symbols')
 endif
 
 " unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.whitespace = 'Ξ'
 
 " airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ''
